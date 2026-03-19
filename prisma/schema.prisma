@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -12,73 +7,68 @@ datasource db {
   provider = "postgresql"
 }
 
-
-
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  role Role
-  country Country
-  createdAt DateTime @default(now())
-  orders Order[]
-  payments PaymentMethod[]
+  id        String          @id @default(uuid())
+  name      String
+  email     String          @unique
+  password  String
+  role      Role
+  country   Country
+  createdAt DateTime        @default(now())
+  orders    Order[]
+  payments  PaymentMethod[]
 
   @@index([role])
   @@index([country])
-
 }
 
 model Order {
-  id String @id @default(uuid())
+  id     String      @id @default(uuid())
   userId String
   status OrderStatus
   amount Float
-  items  OrderItem[]  
-  user User @relation(fields: [userId], references: [id])
+  user   User        @relation(fields: [userId], references: [id])
+  items  OrderItem[]
 
   @@index([userId])
   @@index([status])
-
 }
 
 model OrderItem {
-  id String @id @default(uuid())
-  orderId String
+  id         String   @id @default(uuid())
+  orderId    String
   menuItemId String
-  quantity Int
-  order Order @relation(fields: [orderId], references: [id])
-  menuItem MenuItem @relation(fields: [menuItemId], references: [id])
+  quantity   Int
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  order      Order    @relation(fields: [orderId], references: [id])
 
   @@index([orderId])
   @@index([menuItemId])
 }
 
 model MenuItem {
-  id String @id @default(uuid())
-  name String 
-  price Float
+  id           String      @id @default(uuid())
+  name         String
+  price        Float
   restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
-  orderItems OrderItem[]
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
+  orderItems   OrderItem[]
 
   @@index([restaurantId])
-  
 }
 
 model Restaurant {
-  id String @id @default(uuid())
-  name String
-  country Country
+  id        String     @id @default(uuid())
+  name      String
+  country   Country
   menuItems MenuItem[]
 }
 
 model PaymentMethod {
-  id String @id @default(uuid())
+  id     String      @id @default(uuid())
   userId String
-  type PaymentType
-  user User @relation(fields: [userId], references: [id])
+  type   PaymentType
+  user   User        @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -103,6 +93,6 @@ enum Country {
 
 enum OrderStatus {
   Placed
-  Completed 
+  Completed
   Cancelled
 }
