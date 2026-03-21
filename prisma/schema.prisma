@@ -58,7 +58,7 @@ model MenuItem {
 
 model Restaurant {
   id        String     @id @default(uuid())
-  name      String
+  name      String     @unique
   country   Country
   menuItems MenuItem[]
 }
