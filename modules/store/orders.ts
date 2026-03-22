@@ -12,3 +12,16 @@ export const createOrder = async (userId: string) => {
     return order;
   }
 
+export const getOrderById = async (orderId: string) => {
+    const order = await prisma.order.findUnique({
+        where: { id: orderId },
+        include: {
+            items: {
+                include: {
+                    menuItem: true,
+                },
+            },
+        },
+    });
+    return order;
+}
