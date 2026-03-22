@@ -9,6 +9,13 @@ export const addItemToOrder = async (orderId: string, menuItemId: string, quanti
     if (!menuItem) {
         throw new Error("Menu item not found");
     }
+    // Check order status
+    const order = await prisma.order.findUnique({
+        where: { id: orderId },
+    });
+    if (order?.status !== "Created") {
+        throw new Error("Cannot add items to an order that is not in 'Created' status");
+    }
     // Create the order item
      const Item = await prisma.orderItem.create({
         data: {

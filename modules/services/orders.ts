@@ -1,4 +1,4 @@
-import { createOrder, getOrderById } from "../store/orders";
+import { createOrder, getOrderById, checkoutOrder } from "../store/orders";
 
 export async function createNewOrder(userId: string) {
     const order = await createOrder(userId);
@@ -8,10 +8,13 @@ export async function createNewOrder(userId: string) {
     return {id: order.id, status: order.status};
 }
 
-export async function getOrderDetails(orderId: string) {
+export async function getOrderDetails(orderId: string, userId: string) {
     const order = await getOrderById(orderId);
     if (!order) {
         throw new Error("Order not found");
+    }
+    if (order.userId !== userId) {
+        throw new Error("Forbidden");
     }
     return {
         id: order.id,
@@ -25,4 +28,16 @@ export async function getOrderDetails(orderId: string) {
             menuItemName: item.menuItem.name
         }))
     };
+}
+
+export async function placeOrder(orderId: string, userId: string) {
+    const order = await getOrderById(orderId);
+    if (!order) {
+        throw new Error("Order not found");
+    }
+    if (order.userId !== userId) {
+        throw new Error("Forbidden");
+    }
+    const checkedOutOrder = await checkoutOrder(orderId);
+    return {id: checkedOutOrder.id, status: checkedOutOrder.status, amount: checkedOutOrder.amount};
 }
