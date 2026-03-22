@@ -2,29 +2,29 @@ import { prisma } from "../../lib/prisma";
 import { OrderStatus } from "@/prisma/generated/prisma/enums";
 
 export const createOrder = async (userId: string) => {
-    const order = await prisma.order.create({
-      data: {
-        userId,
-        amount: 0, // Initial amount, will be updated when items are added
-        status: OrderStatus.Created,
-      },
-    });
-    return order;
-  }
+  const order = await prisma.order.create({
+    data: {
+      userId,
+      amount: 0, // Initial amount, will be updated when items are added
+      status: OrderStatus.Created,
+    },
+  });
+  return order;
+};
 
 export const getOrderById = async (orderId: string) => {
-    const order = await prisma.order.findUnique({
-        where: { id: orderId },
+  const order = await prisma.order.findUnique({
+    where: { id: orderId },
+    include: {
+      items: {
         include: {
-            items: {
-                include: {
-                    menuItem: true,
-                },
-            },
+          menuItem: true,
         },
-    });
-    return order;
-}
+      },
+    },
+  });
+  return order;
+};
 
 export const checkoutOrder = async (orderId: string) => {
   const order = await prisma.order.findUnique({
@@ -42,14 +42,17 @@ export const checkoutOrder = async (orderId: string) => {
   const items = await prisma.orderItem.findMany({
     where: { orderId },
   });
-  
+
   if (items.length === 0) {
     throw new Error("Cannot checkout an order with no items");
   }
 
-  const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalAmount = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
 
-  if(totalAmount != order.amount) {
+  if (totalAmount != order.amount) {
     throw new Error("Order amount mismatch. Please try again.");
   }
 
@@ -67,4 +70,4 @@ export const checkoutOrder = async (orderId: string) => {
   });
 
   return updatedOrder;
-}
+};

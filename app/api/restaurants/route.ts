@@ -4,7 +4,7 @@ import { authMiddleware } from "@/modules/middlewares/auth";
 
 export async function GET(req: NextRequest) {
   try {
-   await authMiddleware(req);
+    await authMiddleware(req);
 
     const restaurants = await fetchAllRestaurants();
     return NextResponse.json(restaurants, { status: 200 });

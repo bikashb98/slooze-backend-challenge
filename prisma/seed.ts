@@ -133,59 +133,58 @@ async function main() {
   });
 
   await prisma.paymentMethod.upsert({
-  where: { id: "163ec43a-1a7c-4192-8bfb-195073bae39a" },
-  update: {},
-  create: {
-    userId: "163ec43a-1a7c-4192-8bfb-195073bae39a", 
-    type: PaymentType.Card,
-  }
-})
+    where: { id: "163ec43a-1a7c-4192-8bfb-195073bae39a" },
+    update: {},
+    create: {
+      userId: "163ec43a-1a7c-4192-8bfb-195073bae39a",
+      type: PaymentType.Card,
+    },
+  });
 
-await prisma.paymentMethod.upsert({
-  where: { id: "283b8d3f-aff3-4bad-8565-522972ee5801" },
-  update: {},
-  create: {
-    userId: "283b8d3f-aff3-4bad-8565-522972ee5801", 
-    type: PaymentType.Upi,
-  }
-})
-await prisma.paymentMethod.upsert({
-  where: { id: "9531b9c2-13df-4d31-888a-5748360e6c28" },
-  update: {},
-  create: {
-    userId: "9531b9c2-13df-4d31-888a-5748360e6c28", 
-    type: PaymentType.Cash,
-  }
-})  
+  await prisma.paymentMethod.upsert({
+    where: { id: "283b8d3f-aff3-4bad-8565-522972ee5801" },
+    update: {},
+    create: {
+      userId: "283b8d3f-aff3-4bad-8565-522972ee5801",
+      type: PaymentType.Upi,
+    },
+  });
+  await prisma.paymentMethod.upsert({
+    where: { id: "9531b9c2-13df-4d31-888a-5748360e6c28" },
+    update: {},
+    create: {
+      userId: "9531b9c2-13df-4d31-888a-5748360e6c28",
+      type: PaymentType.Cash,
+    },
+  });
 
-await prisma.paymentMethod.upsert({
-  where: { id: "c2563bdb-5850-437b-8ea7-408a8fe3b99f" },
-  update: {},
-  create: {
-    userId: "c2563bdb-5850-437b-8ea7-408a8fe3b99f", 
-    type: PaymentType.NetBanking,
-  }
-})
+  await prisma.paymentMethod.upsert({
+    where: { id: "c2563bdb-5850-437b-8ea7-408a8fe3b99f" },
+    update: {},
+    create: {
+      userId: "c2563bdb-5850-437b-8ea7-408a8fe3b99f",
+      type: PaymentType.NetBanking,
+    },
+  });
 
-await prisma.paymentMethod.upsert({
-  where: { id: "c4679bb1-f076-4301-ad4a-0e9ce13f687a" },
-  update: {},
-  create: {
-    userId: "c4679bb1-f076-4301-ad4a-0e9ce13f687a", 
-    type: PaymentType.Cash,
-  }
-})
+  await prisma.paymentMethod.upsert({
+    where: { id: "c4679bb1-f076-4301-ad4a-0e9ce13f687a" },
+    update: {},
+    create: {
+      userId: "c4679bb1-f076-4301-ad4a-0e9ce13f687a",
+      type: PaymentType.Cash,
+    },
+  });
 
-await prisma.paymentMethod.upsert({
-  where: { id: "ffbe1ad3-6153-420d-93c8-b88bf56795da" },
-  update: {},
-  create: {
-    userId: "ffbe1ad3-6153-420d-93c8-b88bf56795da", 
-    type: PaymentType.Card,
-  }
-})
+  await prisma.paymentMethod.upsert({
+    where: { id: "ffbe1ad3-6153-420d-93c8-b88bf56795da" },
+    update: {},
+    create: {
+      userId: "ffbe1ad3-6153-420d-93c8-b88bf56795da",
+      type: PaymentType.Card,
+    },
+  });
 }
-
 
 main()
   .then(async () => {
