@@ -1,4 +1,4 @@
-import { createOrder, getOrderById, checkoutOrder } from "../store/orders";
+import { createOrder, getOrderById, checkoutOrder, cancelOrder } from "../store/orders";
 
 export async function createNewOrder(userId: string) {
   const order = await createOrder(userId);
@@ -43,5 +43,20 @@ export async function placeOrder(orderId: string, userId: string) {
     id: checkedOutOrder.id,
     status: checkedOutOrder.status,
     amount: checkedOutOrder.amount,
+  };
+}
+
+export async function removeOrder(orderId: string, userId: string) {
+  const order = await getOrderById(orderId);
+  if (!order) {
+    throw new Error("Order not found");
+  }
+  if (order.userId !== userId) {
+    throw new Error("Forbidden");
+  }
+  const deletedOrder = await cancelOrder(orderId);
+  return {
+    id: deletedOrder.id,
+    status: deletedOrder.status,
   };
 }

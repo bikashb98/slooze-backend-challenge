@@ -71,3 +71,27 @@ export const checkoutOrder = async (orderId: string) => {
 
   return updatedOrder;
 };
+
+export const cancelOrder = async (orderId: string) => {
+  const order = await prisma.order.findUnique({
+    where: { id: orderId },
+  });
+
+  if (!order) {
+    throw new Error("Order not found");
+  }
+
+  if (
+    order.status !== OrderStatus.Created &&
+    order.status !== OrderStatus.Placed
+  ) {
+    throw new Error("Only orders in 'Created' or 'Placed' status can be cancelled");
+  }
+
+  const cancelledOrder = await prisma.order.update({
+    where: { id: orderId },
+    data: { status: OrderStatus.Cancelled },
+  });
+
+  return cancelledOrder;
+};
