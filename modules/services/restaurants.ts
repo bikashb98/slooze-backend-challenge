@@ -1,5 +1,5 @@
 import { getAllRestaurants } from "../store/restaurants";
-import { Role} from "@/prisma/generated/prisma/enums";
+import { Role } from "@/prisma/generated/prisma/enums";
 
 export async function fetchAllRestaurants(role: string, country: string) {
   const restaurants = await getAllRestaurants();

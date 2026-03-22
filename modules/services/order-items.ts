@@ -1,4 +1,7 @@
-import { addItemToOrder, findRestaurantByMenuItemId } from "../store/order-items";
+import {
+  addItemToOrder,
+  findRestaurantByMenuItemId,
+} from "../store/order-items";
 import { Role } from "@/prisma/generated/prisma/enums";
 
 export async function addItem(
@@ -6,12 +9,12 @@ export async function addItem(
   menuItemId: string,
   quantity: number,
   role: string,
-  country: string
+  country: string,
 ) {
-    const restaurant = await findRestaurantByMenuItemId(menuItemId);
-    if (role != Role.Admin && restaurant?.country !== country) {
-        throw new Error("User Forbidden");
-    }
+  const restaurant = await findRestaurantByMenuItemId(menuItemId);
+  if (role != Role.Admin && restaurant?.country !== country) {
+    throw new Error("User Forbidden");
+  }
 
   const item = await addItemToOrder(orderId, menuItemId, quantity);
   if (!item) {

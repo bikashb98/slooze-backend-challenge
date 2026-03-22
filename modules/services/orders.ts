@@ -1,4 +1,9 @@
-import { createOrder, getOrderById, checkoutOrder, cancelOrder } from "../store/orders";
+import {
+  createOrder,
+  getOrderById,
+  checkoutOrder,
+  cancelOrder,
+} from "../store/orders";
 
 export async function createNewOrder(userId: string) {
   const order = await createOrder(userId);

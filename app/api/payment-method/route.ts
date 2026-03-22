@@ -22,10 +22,16 @@ export async function POST(request: NextRequest) {
     }
 
     const updatedPayment = await changePaymentMethod(userId, type);
-    return NextResponse.json({ message: "Payment method updated successfully", payment: updatedPayment }, { status: 200 });
+    return NextResponse.json(
+      {
+        message: "Payment method updated successfully",
+        payment: updatedPayment,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     if (error instanceof Error) {
-         if (error.message === "Forbidden") {
+      if (error.message === "Forbidden") {
         return NextResponse.json(
           {
             error: "Only admin can change payment methods",
@@ -34,7 +40,7 @@ export async function POST(request: NextRequest) {
           { status: 403 },
         );
       }
-         
+
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
 

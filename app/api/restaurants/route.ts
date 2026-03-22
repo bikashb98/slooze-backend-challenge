@@ -12,7 +12,10 @@ export async function GET(req: NextRequest) {
     if (error instanceof Error) {
       if (error.message === "User Forbidden") {
         return NextResponse.json(
-          { error: "Only Admins can view restaurants from other countries", message: error.message },
+          {
+            error: "Only Admins can view restaurants from other countries",
+            message: error.message,
+          },
           { status: 403 },
         );
       }

@@ -14,7 +14,10 @@ export async function POST(
     checkRole(user);
     const { id: orderId } = await params;
     const cancelled = await removeOrder(orderId, user.id);
-    return NextResponse.json({ message: "Order cancelled successfully", order: cancelled }, { status: 200 });
+    return NextResponse.json(
+      { message: "Order cancelled successfully", order: cancelled },
+      { status: 200 },
+    );
   } catch (error) {
     if (error instanceof Error) {
       if (error.message === "Forbidden") {

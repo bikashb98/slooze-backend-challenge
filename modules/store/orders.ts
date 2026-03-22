@@ -85,7 +85,9 @@ export const cancelOrder = async (orderId: string) => {
     order.status !== OrderStatus.Created &&
     order.status !== OrderStatus.Placed
   ) {
-    throw new Error("Only orders in 'Created' or 'Placed' status can be cancelled");
+    throw new Error(
+      "Only orders in 'Created' or 'Placed' status can be cancelled",
+    );
   }
 
   const cancelledOrder = await prisma.order.update({
