@@ -6,9 +6,18 @@ export const authMiddleware = async (req: NextRequest) => {
 
   if (!authHeader) throw new Error("Unauthorized")
 
+  if (!authHeader.startsWith("Bearer ")) {
+    throw new Error("Invalid authorization header")
+  }
+
   const token = authHeader.split(" ")[1]
 
-  const decoded = verifyToken(token)
+  if (!token) throw new Error("Unauthorized")
 
-  return decoded
+  try {
+    const decoded = verifyToken(token)
+    return decoded
+  } catch {
+    throw new Error("Invalid token")
+  }
 }
