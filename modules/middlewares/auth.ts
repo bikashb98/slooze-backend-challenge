@@ -1,7 +1,7 @@
-import { verifyToken } from "@/lib/jwt"
+import { verifyToken, type AuthTokenPayload } from "@/lib/jwt"
 import { NextRequest } from "next/server"
     
-export const authMiddleware = async (req: NextRequest) => {
+export const authMiddleware = async (req: NextRequest): Promise<AuthTokenPayload> => {
   const authHeader = req.headers.get("authorization")
 
   if (!authHeader) throw new Error("Unauthorized")
