@@ -6,8 +6,8 @@ const secretKey = process.env.JWT_SECRET;
 export interface AuthTokenPayload extends JwtPayload {
   id: string;
   email?: string;
-  country?: string;
-  role?: string;
+  country: string;
+  role: string;
   name?: string;
 }
 
@@ -20,6 +20,15 @@ export const verifyToken = (token: string): AuthTokenPayload => {
     const decoded = jwt.verify(token, secretKey!);
 
     if (typeof decoded === "string" || !decoded || !("id" in decoded)) {
+      throw new Error("Invalid token payload");
+    }
+
+    if (
+      !("role" in decoded) ||
+      !("country" in decoded) ||
+      typeof decoded.role !== "string" ||
+      typeof decoded.country !== "string"
+    ) {
       throw new Error("Invalid token payload");
     }
 

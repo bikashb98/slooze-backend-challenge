@@ -47,3 +47,12 @@ export const addItemToOrder = async (
   });
   return Item;
 };
+
+export const findRestaurantByMenuItemId = async (menuItemId: string) => {
+    const menuItem = await prisma.menuItem.findUnique({
+        where: { id: menuItemId },
+        include: { restaurant: true },
+    });
+    return menuItem?.restaurant;
+
+}
