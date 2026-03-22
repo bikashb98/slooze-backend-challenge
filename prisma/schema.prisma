@@ -94,4 +94,5 @@ enum OrderStatus {
   Placed
   Completed
   Cancelled
+  Created
 }
