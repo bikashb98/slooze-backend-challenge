@@ -38,6 +38,7 @@ model OrderItem {
   orderId    String
   menuItemId String
   quantity   Int
+  price      Float
   menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
   order      Order    @relation(fields: [orderId], references: [id])
 
