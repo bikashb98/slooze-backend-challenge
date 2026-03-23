@@ -1,0 +1,270 @@
+{
+  "info": {
+    "_postman_id": "be467dfb-896b-458e-8678-54f650b74fb8",
+    "name": "Slooze-Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29469881",
+    "_collection_link": "https://go.postman.co/collection/29469881-be467dfb-896b-458e-8678-54f650b74fb8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"nickfury@shield.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/auth/login",
+              "host": ["{{url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Restaurants",
+      "item": [
+        {
+          "name": "All Restaurants",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/restaurants",
+              "host": ["{{url}}"],
+              "path": ["api", "restaurants"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Menu Items By Restaurant Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/restaurants/:resid/menu",
+              "host": ["{{url}}"],
+              "path": ["api", "restaurants", ":resid", "menu"],
+              "variable": [
+                {
+                  "key": "resid",
+                  "value": "08c5c86f-95b4-4280-a162-d47cdd3016d4"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/orders",
+              "host": ["{{url}}"],
+              "path": ["api", "orders"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Items",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"menu_item_id\":\"3de7953b-55af-4b4d-988c-c0aa5eadfeda\",\r\n    \"quantity\" : 2\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/orders/:ordid/items",
+              "host": ["{{url}}"],
+              "path": ["api", "orders", ":ordid", "items"],
+              "variable": [
+                {
+                  "key": "ordid",
+                  "value": "20125396-8ff6-4f91-a04c-0a7ea43d7f65"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Order details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/orders/:ordid",
+              "host": ["{{url}}"],
+              "path": ["api", "orders", ":ordid"],
+              "variable": [
+                {
+                  "key": "ordid",
+                  "value": "2e32d7ae-e217-4302-9ad6-8048ada9861a"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Checkout Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/orders/:ordid/checkout",
+              "host": ["{{url}}"],
+              "path": ["api", "orders", ":ordid", "checkout"],
+              "variable": [
+                {
+                  "key": "ordid",
+                  "value": "2e32d7ae-e217-4302-9ad6-8048ada9861a"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/orders/:ordid/cancel",
+              "host": ["{{url}}"],
+              "path": ["api", "orders", ":ordid", "cancel"],
+              "variable": [
+                {
+                  "key": "ordid",
+                  "value": "2e32d7ae-e217-4302-9ad6-8048ada9861a"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Payment Update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user_id\": \"163ec43a-1a7c-4192-8bfb-195073bae39a\",\r\n    \"type\" : \"Cash\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/payment-method",
+              "host": ["{{url}}"],
+              "path": ["api", "payment-method"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "member_token",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
