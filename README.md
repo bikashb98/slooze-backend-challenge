@@ -26,7 +26,7 @@ Enforced at:
 
 # Setup:
 
-1**.** _Clone the repo_
+1\. _Clone the repo_
 
 git clone [https://github.com/bikashb98/slooze-backend-challenge.git](https://github.com/bikashb98/slooze-backend-challenge.git)
 
