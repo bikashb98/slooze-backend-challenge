@@ -60,7 +60,7 @@ npx prisma db seed
 
 A postman collection called _Slooze-Backend.postman_collection.json_ is added in the project import the collection from your postman client.
 
-7\. Run the poject
+7\. Run the project
 
 **npm run dev**
 
