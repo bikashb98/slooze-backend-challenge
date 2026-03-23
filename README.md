@@ -13,7 +13,7 @@ A slooze backend system for a food ordering application implementing **Role-Base
 - Role-based access control (Admin, Manager, Member)
 - Country-based data restriction (India / America)
 
-#Country-Based Restriction (ReBAC)
+# Country-Based Restriction (ReBAC)
 
 - Admin → Access all data
 - Manager → Access only their own data
@@ -24,7 +24,7 @@ Enforced at:
 - Restaurant listing
 - Order creation
 
-#Setup:
+# Setup:
 
 1**.** _Clone the repo_
 
