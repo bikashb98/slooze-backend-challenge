@@ -4,6 +4,7 @@ import {
   checkoutOrder,
   cancelOrder,
 } from "../store/orders";
+import { Role } from "@/prisma/generated/prisma/enums";
 
 export async function createNewOrder(userId: string) {
   const order = await createOrder(userId);
@@ -13,13 +14,17 @@ export async function createNewOrder(userId: string) {
   return { id: order.id, status: order.status };
 }
 
-export async function getOrderDetails(orderId: string, userId: string) {
+export async function getOrderDetails(
+  orderId: string,
+  userId: string,
+  role: string,
+) {
   const order = await getOrderById(orderId);
   if (!order) {
     throw new Error("Order not found");
   }
-  if (order.userId !== userId) {
-    throw new Error("Forbidden");
+  if (role !== Role.Admin && order.userId !== userId) {
+    throw new Error("User Forbidden");
   }
   return {
     id: order.id,
